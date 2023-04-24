@@ -1,0 +1,6 @@
+.elements__element {
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: white;
+    height: 361px;
+}
