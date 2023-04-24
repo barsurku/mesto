@@ -17,9 +17,9 @@
                <div class="profile__info">
                   <h1 class="profile__title profile__title_popup">Жак-Ив Кусто</h1>
                   <p class="profile__subtitle profile__subtitle_popup">Исследователь океана</p>
-                  <div role="button" class="profile__edit-button"></div>
+                  <button type="button" class="profile__edit-button"></button>
                </div>
-               <div role="button" class="profile__add-button"></div>
+               <button type="button" class="profile__add-button"></button>
             </section>
             <section class="elements">
                <ul class="elements__cards">
@@ -74,9 +74,9 @@
       </div>
       <section class="popup popup_type_edit-button">
          <div class="popup__content">
-            <div role="button" class="popup__close"></div>
+            <button type="button" class="popup__close"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
-            <form class="popup__form">
+            <form class="popup__form" name="editProfile">
                <input class="popup__input popup__input_type_name" name="name"/>
                <input class="popup__input popup__input_type_info" name="info"/>
                <button type="submit" class="popup__submit">Сохранить</button>

@@ -5,7 +5,6 @@ const nameInput = editButtonPopup.querySelector(".popup__input_type_name");
 const nameProfile = document.querySelector(".profile__title_popup");
 const infoInput = editButtonPopup.querySelector(".popup__input_type_info");
 const infoProfile = document.querySelector(".profile__subtitle_popup");
-const editButtonPopupSubmit = editButtonPopup.querySelector(".popup__submit");
 const editButtonPopupForm = editButtonPopup.querySelector(".popup__form");
 
 
@@ -14,7 +13,7 @@ const editButtonPopupForm = editButtonPopup.querySelector(".popup__form");
 editButton.addEventListener('click', () => {
     console.log("click");
 
-    editButtonPopup.classList.add("popup_open");
+    editButtonPopup.classList.add("popup_opened");
 
     nameInput.value = nameProfile.textContent;
     infoInput.value = infoProfile.textContent;
@@ -22,20 +21,14 @@ editButton.addEventListener('click', () => {
 
 //закрытие попапа нажатием на крестик
 editButtonPopupCloseButton.addEventListener('click', () => {
-    editButtonPopup.classList.remove("popup_open");
+    editButtonPopup.classList.remove("popup_opened");
 });
 
-//Имя
+//Имя, о себе
 editButtonPopupForm.addEventListener('submit', (event) => {
     event.preventDefault();
-    editButtonPopup.classList.remove("popup_open");
+    editButtonPopup.classList.remove("popup_opened");
 
-    nameProfile.innerHTML = nameInput.value;
-});
-
-//О себе
-editButtonPopupForm.addEventListener('submit', (event) => {
-    event.preventDefault();
-    infoProfile.innerHTML = infoInput.value;
-
+    nameProfile.textContent = nameInput.value;
+    infoProfile.textContent = infoInput.value;
 });
