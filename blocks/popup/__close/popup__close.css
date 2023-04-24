@@ -10,6 +10,7 @@
     right: -39px;
     top: -40px;
     cursor: pointer;
+    border: 0;
 }
 
 .popup__close:hover {
@@ -22,5 +23,6 @@
         height: 20px;
         right: 0;
         top: -37px;
+        border 0;
     }
 }
