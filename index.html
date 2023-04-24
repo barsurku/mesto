@@ -1,95 +1,88 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Место</title>
-    <link rel="stylesheet" href="./pages/index.css">
-</head>
-<body>
-  <div class="page">
-    <header class="header">
-      <img src="./images/logo.svg" class="header__logo" alt="Логотип">
-    </header>
-
-    <main class="content">
-      <section class="profile">
-        <img class="profile__avatar" src="./images/avatar.png" alt="Аватар профиля">
-        <div class="profile__info">
-          <h1 class="profile__title profile__title_popup">Жак-Ив Кусто</h1>
-          <p class="profile__subtitle profile__subtitle_popup">Исследователь океана</p>
-          <div role="button" class="profile__edit-button" type="button"></div>
-        </div>
-        <div role="button" class="profile__add-button" type="button"></div>
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Место</title>
+      <link rel="stylesheet" href="./pages/index.css">
+   </head>
+   <body>
+      <div class="page">
+         <header class="header">
+            <img src="./images/logo.svg" class="header__logo" alt="Логотип">
+         </header>
+         <main class="content">
+            <section class="profile">
+               <img class="profile__avatar" src="./images/avatar.png" alt="Аватар профиля">
+               <div class="profile__info">
+                  <h1 class="profile__title profile__title_popup">Жак-Ив Кусто</h1>
+                  <p class="profile__subtitle profile__subtitle_popup">Исследователь океана</p>
+                  <div role="button" class="profile__edit-button"></div>
+               </div>
+               <div role="button" class="profile__add-button"></div>
+            </section>
+            <section class="elements">
+               <ul class="elements__cards">
+                  <li class="elements__element">
+                     <img class="elements__element-photo" src="./images/Карачаевск.png" alt="Карачаевск"/>
+                     <div class="elements__element-info">
+                        <h2 class="elements__element-title">Карачаевск</h2>
+                        <button class="elements__like" type="button"></button>
+                     </div>
+                  </li>
+                  <li class="elements__element">
+                     <img class="elements__element-photo" src="./images/Гора-Эльбрус.png" alt="Гора Эльбрус"/>
+                     <div class="elements__element-info">
+                        <h2 class="elements__element-title">Гора Эльбрус</h2>
+                        <button class="elements__like" type="button"></button>
+                     </div>
+                  </li>
+                  <li class="elements__element">
+                     <img class="elements__element-photo" src="./images/Домбай.png" alt="Домбай"/>
+                     <div class="elements__element-info">
+                        <h2 class="elements__element-title">Домбай</h2>
+                        <button class="elements__like" type="button"></button>
+                     </div>
+                  </li>
+                  <li class="elements__element">
+                     <img class="elements__element-photo" src="./images/Гора-Эльбрус.png" alt="Гора Эльбрус"/>
+                     <div class="elements__element-info">
+                        <h2 class="elements__element-title">Гора Эльбрус</h2>
+                        <button class="elements__like" type="button"></button>
+                     </div>
+                  </li>
+                  <li class="elements__element">
+                     <img class="elements__element-photo" src="./images/Домбай.png" alt="Домбай"/>
+                     <div class="elements__element-info">
+                        <h2 class="elements__element-title">Домбай</h2>
+                        <button class="elements__like" type="button"></button>
+                     </div>
+                  </li>
+                  <li class="elements__element">
+                     <img class="elements__element-photo" src="./images/Карачаевo-Черкесия.png" alt="Карачаево-Черкессия"/>
+                     <div class="elements__element-info">
+                        <h2 class="elements__element-title">Карачаево-Черкессия</h2>
+                        <button class="elements__like" type="button"></button>
+                     </div>
+                  </li>
+               </ul>
+            </section>
+         </main>
+         <footer class="footer">
+            <p class="footer__copyright">© 2023 Mesto Russia</p>
+         </footer>
+      </div>
+      <section class="popup popup_type_edit-button">
+         <div class="popup__content">
+            <div role="button" class="popup__close"></div>
+            <h2 class="popup__title">Редактировать профиль</h2>
+            <form class="popup__form">
+               <input class="popup__input popup__input_type_name" name="name"/>
+               <input class="popup__input popup__input_type_info" name="info"/>
+               <button type="submit" class="popup__submit">Сохранить</button>
+            </form>
+         </div>
       </section>
-
-      <section class="elements">
-        <ul class="elements__cards">
-        <li class="elements__element">
-          <img class="elements__element-photo" src="./images/Карачаевск.png" alt="Карачаевск"/>
-          <div class="elements__element-info">
-            <h2 class="elements__element-title">Карачаевск</h2>
-            <button class="elements__like" type="button"></button>
-          </div>
-        </li>
-      <li class="elements__element">
-          <img class="elements__element-photo" src="./images/Гора Эльбрус.png" alt="Гора Эльбрус"/>
-          <div class="elements__element-info">
-            <h2 class="elements__element-title">Гора Эльбрус</h2>
-            <button class="elements__like" type="button"></button>
-          </div>
-      </li>
-      <li class="elements__element">
-          <img class="elements__element-photo" src="./images/Домбай.png" alt="Домбай"/>
-          <div class="elements__element-info">
-          <h2 class="elements__element-title">Домбай</h2>
-          <button class="elements__like" type="button"></button>
-          </div>
-      </li>
-      <li class="elements__element">
-          <img class="elements__element-photo" src="./images/Гора Эльбрус.png" alt="Гора Эльбрус"/>
-          <div class="elements__element-info">
-          <h2 class="elements__element-title">Гора Эльбрус</h2>
-          <button class="elements__like" type="button"></button>
-          </div>
-      </li>
-      <li class="elements__element">
-        <img class="elements__element-photo" src="./images/Домбай.png" alt="Домбай"/>
-        <div class="elements__element-info">
-          <h2 class="elements__element-title">Домбай</h2>
-          <button class="elements__like" type="button"></button>
-        </div>
-      </li>
-      <li class="elements__element">
-          <img class="elements__element-photo" src="./images/Карачаевo-Черкесия.png" alt="Карачаево-Черкессия"/>
-          <div class="elements__element-info">
-          <h2 class="elements__element-title">Карачаево-Черкессия</h2>
-          <button class="elements__like" type="button"></button>
-          </div>
-      </li>
-        </ul>
-      </section>
-    </main>
-
-    <footer class="footer">
-      <p class="footer__copyright">© 2023 Mesto Russia</p>
-    </footer>
-  </div>
-
-
-  <section class="popup popup_type_edit-button">
-    <div class="popup__content">
-      <div role="button" class="popup__close"></div>
-      <h2 class="popup__title">Редактировать профиль</h2>
-      <form class="popup__form">
-        <input class="popup__input popup__input_type_name" name="name"/>
-        <input class="popup__input popup__input_type_info" name="info"/>
-        <button type="submit" class="popup__submit">Сохранить</button>
-      </form>
-
-    </div>
-  </section>
-
-<script src="./scripts/index.js"></script>
-</body>
+      <script src="./scripts/index.js"></script>
+   </body>
 </html>
