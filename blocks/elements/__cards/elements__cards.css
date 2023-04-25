@@ -18,6 +18,5 @@
     .elements__cards {
         grid-template-columns: repeat(1, 282px);
         gap: 20px;
-        justify-content: center;
     }
 }
