@@ -1,3 +1,14 @@
+//отрытие-закрытие попапов
+const openedPopup = (popup) => {
+    popup.classList.add('popup_opened');
+};
+const closePopup = (popup) => {
+    popup.classList.remove('popup_opened');
+};
+
+
+
+//редакт профиля
 const editButton = document.querySelector(".profile__edit-button");
 const editButtonPopup = document.querySelector(".popup_type_edit-button");
 const editButtonPopupCloseButton = editButtonPopup.querySelector(".popup__close");
@@ -9,7 +20,7 @@ const editButtonPopupForm = editButtonPopup.querySelector(".popup__form");
 
 //Отрытие попапа
 editButton.addEventListener('click', () => {
-    editButtonPopup.classList.add("popup_opened");
+    openedPopup(editButtonPopup);
 
     nameInput.value = nameProfile.textContent;
     infoInput.value = infoProfile.textContent;
@@ -28,6 +39,8 @@ editButtonPopupForm.addEventListener('submit', (event) => {
     nameProfile.textContent = nameInput.value;
     infoProfile.textContent = infoInput.value;
 });
+
+
 
 //Карточки
 const elementsTemplate = document.getElementById('elements-template');
@@ -56,6 +69,7 @@ const createCardElement = (cardData) => {
         openedPopup(imagePopup);
     });
 
+    //кнопки мусорки и лайка
     const likeButton = cardElement.querySelector('.elements__like_type_like');
     const deleteButton = cardElement.querySelector('.elements__delete_type_delete');
 
@@ -73,26 +87,20 @@ const createCardElement = (cardData) => {
 
 const renderCardElement = (cardElement) => {
     elementsGrid.prepend(cardElement);
-}
+};
 
 initialCards.forEach((elements__element) => {
     renderCardElement(createCardElement(elements__element));
 
 });
 
+
+
 //Добавление карточек + попап кнопки add
 const addElementsPopup = document.querySelector('.popup_type_add-button');
 const addElementsButton = document.querySelector('.profile__add-button');
 const addElementsForm = document.querySelector('.popup__form_type_add-elements');
 const addButtonPopupCloseButton = addElementsPopup.querySelector('.popup__close');
-
-const openedPopup = (popup) => {
-    popup.classList.add('popup_opened');
-};
-
-const closePopup = (popup) => {
-    popup.classList.remove('popup_opened');
-};
 
 addElementsButton.addEventListener('click', () => {
     openedPopup(addElementsPopup);
@@ -123,6 +131,7 @@ addElementsForm.addEventListener('submit', handleAddElementsSubmit);
     addButtonPopupCloseButton.addEventListener('click', () => {
     addElementsPopup.classList.remove("popup_opened");
 });
+
 
 //закрытие image попапа нажатием на крестик
 const imagePopupCloseBtn = document.querySelector('.popup__close-image');
