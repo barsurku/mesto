@@ -3,8 +3,6 @@ export class Card {
   #name;
   #cardElement;
   #templateSelector;
-  #handleClickDel;
-  #handleClickLike;
   #handleClickPopup;
 
   #getTemplate() {
@@ -14,15 +12,13 @@ export class Card {
       .cloneNode(true);
   }
   constructor(
-    { cardData, handleClickDel, handleClickLike, handleClickPopup },
+    { cardData, handleClickPopup },
     templateSelector
   ) {
     this.#name = cardData.name;
     this.#link = cardData.link;
 
     this.#templateSelector = templateSelector;
-    this.#handleClickDel = handleClickDel;
-    this.#handleClickLike = handleClickLike;
     this.#handleClickPopup = handleClickPopup;
   }
 
@@ -40,27 +36,40 @@ export class Card {
     elementImage.src = this.#link;
     elementImage.alt = this.#name;
 
-    //попап картинки
-    elementImage.addEventListener("click", () => {
-      this.#handleClickPopup(this.#link, this.#name);
-    });
+    this._setEventListeners();
+    return this.#cardElement;
+  };
 
-    //кнопки мусорки и лайка
+  //кнопки мусорки и лайка
+  _handleClickDel() {
+    this.#cardElement.remove();
+  };
+
+  _handleClickLike(buttonLike) {
+    buttonLike.classList.toggle("elements__like_active");
+  };
+  
+  _setEventListeners() {
     const buttonLike = this.#cardElement.querySelector(
       ".elements__like_type_like"
     );
+    buttonLike.addEventListener("click", () => {
+      this._handleClickLike(buttonLike);
+    });
+    
     const buttonDelete = this.#cardElement.querySelector(
       ".elements__delete_type_delete"
     );
-
-    buttonLike.addEventListener("click", () => {
-      this.#handleClickLike(buttonLike);
-    });
-
     buttonDelete.addEventListener("click", () => {
-      this.#handleClickDel(this.#cardElement);
+      this._handleClickDel(this.#cardElement);
     });
 
-    return this.#cardElement;
-  };
+    //попап картинки
+    const elementImage = this.#cardElement.querySelector(
+      ".elements__element-photo"
+    );
+    elementImage.addEventListener("click", () => {
+      this.#handleClickPopup(this.#link, this.#name);
+    });
+  }
 };    
