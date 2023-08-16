@@ -1,3 +1,18 @@
+import { FormValidator } from "./FormValidator.js";
+import { List } from "./List.js";
+import { Card } from "./card.js";
+import { initialCards } from "./initialCards.js";
+
+ //конфиг
+  const config = {
+  formElement: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__submit",
+  inactiveButtonClass: "popup__submit_disabled",
+  inputErrorClass: "popup__input_invalid",
+  errorClass: "popup__input-error_visible",
+};
+
 //отрытие-закрытие попапов
 const openPopup = (popup) => {
   popup.classList.add("popup_open");
@@ -62,68 +77,41 @@ popupEditProfileCloseButton.addEventListener("click", () => {
 });
 
 //Имя, о себе
-popupEditProfileForm.addEventListener("submit", (event) => {
+function handleEditProfileSubmit(event) {
   event.preventDefault();
-  closePopup(popupButtonEditProfile);
-
   nameProfile.textContent = nameInput.value;
   infoProfile.textContent = infoInput.value;
-});
+
+  closePopup(popupButtonEditProfile);
+}
 
 //Карточки
-const elementsTemplate = document.getElementById("elements-template");
-const elementsGrid = document.querySelector(".elements__cards");
-
 //попап картинки
 const popupElementsImage = document.querySelector(".popup_type_image");
 const popupCardImage = document.querySelector(".popup__element-image");
 const popupCardSubtitle = document.querySelector(".popup__image-subtitle");
 
-const createCardElement = (cardData) => {
-  const cardElement = elementsTemplate.content.querySelector('.elements__element').cloneNode(true);
-
-  const elementName = cardElement.querySelector(".elements__element-title");
-  const elementImage = cardElement.querySelector(".elements__element-photo");
-
-  elementName.textContent = cardData.name;
-  elementImage.src = cardData.link;
-  elementImage.alt = cardData.name;
-
-  //попап картинки
-  elementImage.addEventListener("click", () => {
-    popupCardImage.src = cardData.link;
-    popupCardImage.alt = cardData.name;
-    popupCardSubtitle.textContent = cardData.name;
-    openPopup(popupElementsImage);
-  });
-
-  //кнопки мусорки и лайка
-  const buttonLike = cardElement.querySelector(".elements__like_type_like");
-  const buttonDelete = cardElement.querySelector(
-    ".elements__delete_type_delete"
-  );
-
-  const handleLike = () => {
-    buttonLike.classList.toggle("elements__like_active");
-  };
-
-  const handleDelete = () => {
+//функции карточек из класса card
+function handleClickDel(cardElement) {
     cardElement.remove();
-  };
-
-  buttonLike.addEventListener("click", handleLike);
-  buttonDelete.addEventListener("click", handleDelete);
-
-  return cardElement;
 };
 
-const renderCardElement = (cardElement) => {
-  elementsGrid.prepend(cardElement);
+function handleClickLike(buttonLike) {
+  buttonLike.classList.toggle("elements__like_active");
 };
 
-initialCards.forEach((elements__element) => {
-  renderCardElement(createCardElement(elements__element));
-});
+function handleClickPopup(link, name) {
+  popupCardImage.src = link;
+  popupCardImage.alt = name;
+  popupCardSubtitle.textContent = name;
+  openPopup(popupElementsImage);
+};
+
+//карточки с классом Card и List
+function renderCardElement ({cardData, position = "append"}) {
+  const cardElement = new Card({cardData, handleClickDel, handleClickLike, handleClickPopup}, "#elements-template").createCardElement();
+  cardListInstance.addItem(cardElement, position);
+};
 
 //Добавление карточек + попап кнопки add
 const popupAddElements = document.querySelector(".popup_type_add-button");
@@ -153,7 +141,7 @@ const handleAddElementsSubmit = (event) => {
     link,
   };
 
-  renderCardElement(createCardElement(cardData));
+  renderCardElement({ cardData, position: "prepend" });
   closePopup(popupAddElements);
 
   formAddElements.reset();
@@ -177,3 +165,17 @@ imagePopupCloseBtn.addEventListener("click", () => {
 closeByOverlay(popupButtonEditProfile);
 closeByOverlay(popupAddElements);
 closeByOverlay(popupElementsImage);
+
+//класс List
+const cardListInstance = new List(renderCardElement,".elements__cards" );
+cardListInstance.renderItems(initialCards);
+
+//валидация попапа профиля c formValid
+const formValidatorProfile = new FormValidator(config, popupEditProfileForm);
+formValidatorProfile.enableValidation();
+popupEditProfileForm.addEventListener('submit', handleEditProfileSubmit);
+
+//валидация попапа добавлений карточек c formValid
+const formValidatorAddCard = new FormValidator(config, formAddElements);
+formValidatorAddCard.enableValidation();
+formAddElements.addEventListener('submit', handleAddElementsSubmit);
