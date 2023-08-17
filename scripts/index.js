@@ -18,11 +18,13 @@ const openPopup = (popup) => {
   popup.classList.add("popup_open");
 
   window.addEventListener("keydown", closeByEsc);
+  popup.addEventListener('mousedown', closebyOverlay);
 };
 const closePopup = (popup) => {
   popup.classList.remove("popup_open");
 
   window.removeEventListener("keydown", closeByEsc);
+  popup.removeEventListener('mousedown', closebyOverlay);
 };
 
 //закрытие popup на esc
@@ -34,11 +36,11 @@ function closeByEsc(event) {
 };
 
 //закрытие попапов на оверлей
-document.addEventListener('click', function(event) {
-  if (event.target.classList.contains('popup')) {
-      closePopup(event.target);
-    }
-});
+function closebyOverlay(event) {
+  if(event.target.classList.contains('popup')) {
+    closePopup(event.target);
+  }
+};
 
 //редакт профиля
 const buttonEditProfile = document.querySelector(".profile__edit-button");

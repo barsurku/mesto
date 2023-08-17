@@ -23,32 +23,32 @@ export class FormValidator {
   }
 
   // включение валидации
-  enableValidation(formElement, config) {
-    this.setEventListeners(formElement, config);
+  enableValidation() {
+    this.setEventListeners();
   }
 
   setEventListeners() {
     this.toggleButtonState();
     this.#inputList.forEach((input) => {
       input.addEventListener("input", () => {
-        this.checkInputValidity(input);
+        this.#checkInputValidity(input);
         this.toggleButtonState();
       });
     });
   }
 
   //valid
-  hideInputError(input) {
+  #hideInputError(input) {
     const errorElement = this.#formElement.querySelector(`#error-${input.id}`);
     input.classList.remove(this.#inputErrorClass);
     errorElement.classList.remove(this.#errorClass);
 
     //исчезание ошибки
     errorElement.textContent = "";
-  }
+  };
 
   //invalid
-  showInputError(input, errorMessage) {
+  #showInputError(input, errorMessage) {
     const errorElement = this.#formElement.querySelector(`#error-${input.id}`);
     input.classList.add(this.#inputErrorClass);
     errorElement.classList.add(this.#errorClass);
@@ -58,22 +58,22 @@ export class FormValidator {
   }
 
   //изменение вида валидности
-  checkInputValidity(input) {
+  #checkInputValidity(input) {
     if (!input.validity.valid) {
-      this.showInputError(input, input.validationMessage);
+      this.#showInputError(input, input.validationMessage);
     } else {
-      this.hideInputError(input);
+      this.#hideInputError(input);
     }
   }
 
-  hasInvalidInput() {
+  #hasInvalidInput() {
     return this.#inputList.some((input) => {
       return !input.validity.valid;
     });
   }
 
   toggleButtonState() {
-    if (this.hasInvalidInput()) {
+    if (this.#hasInvalidInput()) {
       this.#buttonElement.classList.add(this.#inactiveButtonClass);
       this.#buttonElement.disabled = true;
     } else {
@@ -85,7 +85,7 @@ export class FormValidator {
   resetValidation() {
     this.toggleButtonState();
     this.#inputList.forEach((input) => {
-      this.hideInputError(input);
+      this.#hideInputError(input);
     });
   }
 }
