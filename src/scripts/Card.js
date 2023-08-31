@@ -3,24 +3,24 @@ export class Card {
   #name;
   #cardElement;
   #templateSelector;
-  #handleClickPopup;
+  #handleCardClick;
 
   #getTemplate() {
     return document
       .querySelector(this.#templateSelector)
       .content.querySelector(".elements__element")
       .cloneNode(true);
-  }
+  };
   constructor(
-    { cardData, handleClickPopup },
+    { name, link }, handleCardClick ,
     templateSelector
   ) {
-    this.#name = cardData.name;
-    this.#link = cardData.link;
+    this.#name = name;
+    this.#link = link;
 
     this.#templateSelector = templateSelector;
-    this.#handleClickPopup = handleClickPopup;
-  }
+    this.#handleCardClick = handleCardClick;
+  };
 
   createCardElement() {
     this.#cardElement = this.#getTemplate();
@@ -33,8 +33,8 @@ export class Card {
     );
 
     elementName.textContent = this.#name;
-    elementImage.src = this.#link;
     elementImage.alt = this.#name;
+    elementImage.src = this.#link;
 
     this._setEventListeners();
     return this.#cardElement;
@@ -69,7 +69,7 @@ export class Card {
       ".elements__element-photo"
     );
     elementImage.addEventListener("click", () => {
-      this.#handleClickPopup(this.#link, this.#name);
+      this.#handleCardClick(this.#link, this.#name);
     });
   }
 };    
