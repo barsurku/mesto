@@ -7,12 +7,12 @@ export class FormValidator {
   #formElement;
   #buttonElement;
   #inputList;
-  constructor(config, formElement) {
-    this.#inputSelector = config.inputSelector;
-    this.#submitButtonSelector = config.submitButtonSelector;
-    this.#inactiveButtonClass = config.inactiveButtonClass;
-    this.#inputErrorClass = config.inputErrorClass;
-    this.#errorClass = config.errorClass;
+  constructor(validationConfig, formElement) {
+    this.#inputSelector = validationConfig.inputSelector;
+    this.#submitButtonSelector = validationConfig.submitButtonSelector;
+    this.#inactiveButtonClass = validationConfig.inactiveButtonClass;
+    this.#inputErrorClass = validationConfig.inputErrorClass;
+    this.#errorClass = validationConfig.errorClass;
     this.#formElement = formElement;
     this.#buttonElement = this.#formElement.querySelector(
       this.#submitButtonSelector

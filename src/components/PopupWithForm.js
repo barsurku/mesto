@@ -1,4 +1,5 @@
-import { Popup } from "../scripts/Popup.js";
+import { Popup } from "./Popup.js";
+
 
 export class PopupWithForm extends Popup {
   #handleFormSubmit;
@@ -19,9 +20,9 @@ export class PopupWithForm extends Popup {
     return values;
   };
 
-  setInputValues(cardData) {
+  setInputValues(formValues) {
     this.#inputList.forEach((input) => {
-      input.value = cardData[input.name];
+      input.value = formValues[input.name];
     });
   };
 
@@ -30,7 +31,6 @@ export class PopupWithForm extends Popup {
     this.popupForm.addEventListener("submit", (event) => {
       event.preventDefault();
       this.#handleFormSubmit(this._getInputValues());
-      this.close();
     });
   };
 

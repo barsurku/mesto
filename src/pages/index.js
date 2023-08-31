@@ -1,15 +1,15 @@
 import "./index.css";
 
-import { FormValidator } from "../scripts/FormValidator.js";
-import { Section } from "../scripts/Section.js";
-import { Card } from "../scripts/Card.js";
-import { initialCards } from "../scripts/initialCards.js";
-import { PopupWithImage } from "../scripts/PopupWithImage.js";
-import { PopupWithForm } from "../scripts/PopupWithForm.js";
-import { UserInfo } from "../scripts/UserInfo.js";
+import { FormValidator } from "../components/FormValidator.js";
+import { Section } from "../components/Section.js";
+import { Card } from "../components/Card.js";
+import { initialCards } from "../utils/initialCards.js";
+import { PopupWithImage } from "../components/PopupWithImage.js";
+import { PopupWithForm } from "../components/PopupWithForm.js";
+import { UserInfo } from "../components/UserInfo.js";
 
 //конфиг
-const config = {
+const validationConfig = {
   formElement: ".popup__form",
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__submit",
@@ -35,10 +35,10 @@ const userInfo = new UserInfo({
 
 const profilePopup = new PopupWithForm({
   popupSelector: ".popup_type_edit-button",
-  handleFormSubmit: (cardData) => {
+  handleFormSubmit: (formValues) => {
     userInfo.setUserInfo({
-      title: cardData.nameUser,
-      subtitle: cardData.infoUser,
+      title: formValues.nameUser,
+      subtitle: formValues.infoUser,
     });
     profilePopup.close();
   },
@@ -51,8 +51,9 @@ buttonEditProfile.addEventListener("click", () => {
   profilePopup.open();
 });
 
+
 //Карточки
-const formAddElements = document.querySelector(
+const formAddCard = document.querySelector(
   ".popup__form_type_add-elements"
 );
 const buttonAddCards = document.querySelector(".profile__add-button");
@@ -60,24 +61,25 @@ const buttonAddCards = document.querySelector(".profile__add-button");
 const addCardsPopup = new PopupWithForm({
   popupSelector: ".popup_type_add-button",
   handleFormSubmit: (cardData) => {
-    const addCardElement = renderCardElement(cardData);
-    section.addItem(addCardElement, "prepend");
+    const addCardElement = createCard(cardData);
+    cardsSection.addItem(addCardElement, "prepend");
     addCardsPopup.close();
   },
 });
 
-const cardSection = {
+
+const cardSectionOptions = {
   items: initialCards,
   renderer: (item) => {
-    section.addItem(renderCardElement(item));
+    cardsSection.addItem(createCard(item));
   },
 };
 
 //класс section и функция создания карточек
-const section = new Section(cardSection, ".elements__cards");
-section.renderItems();
+const cardsSection = new Section(cardSectionOptions, ".elements__cards");
+cardsSection.renderItems();
 
-function renderCardElement(cardData) {
+function createCard(cardData) {
   const cardElement = new Card(cardData, handleCardClick, "#elements-template");
   const addCardElement = cardElement.createCardElement();
   return addCardElement;
@@ -96,11 +98,11 @@ function handleCardClick(link, name) {
 }
 
 //валидация попапа профиля c formValid
-const formValidatorProfile = new FormValidator(config, popupEditProfileForm);
+const formValidatorProfile = new FormValidator(validationConfig, popupEditProfileForm);
 formValidatorProfile.enableValidation();
 
 //валидация попапа добавлений карточек c formValid
-const formValidatorAddCard = new FormValidator(config, formAddElements);
+const formValidatorAddCard = new FormValidator(validationConfig, formAddCard);
 formValidatorAddCard.enableValidation();
 
 //слушатели
