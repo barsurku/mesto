@@ -5,7 +5,7 @@ export class PopupWithImage extends Popup {
         super(popupSelector)
         this.popupCardImage = document.querySelector(".popup__element-image");
         this.popupCardSubtitle = document.querySelector(".popup__image-subtitle");
-    }
+    };
 
     open(link, name) {
         super.open();

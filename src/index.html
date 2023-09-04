@@ -11,11 +11,13 @@
             <img src="<%=require('./images/logo.svg')%>" class="header__logo" alt="Логотип">
          </header>
          <main class="content">
+            <!-- профиль с кнопками -->
             <section class="profile">
-               <img class="profile__avatar" src="<%=require('./images/avatar.png')%>" alt="Фото пользователя">
+               <img class="profile__avatar" alt="Фото пользователя">
+               <button class="profile__avatar-button"></button>
                <div class="profile__info">
-                  <h1 class="profile__title">Жак-Ив Кусто</h1>
-                  <p class="profile__subtitle">Исследователь океана</p>
+                  <h1 class="profile__title"></h1>
+                  <p class="profile__subtitle"></p>
                   <button type="button" class="profile__edit-button"></button>
                </div>
                <button type="button" class="profile__add-button"></button>
@@ -25,23 +27,38 @@
                </ul>
             </section>
          </main>
+         <!-- подвал -->
          <footer class="footer">
             <p class="footer__copyright">© 2023 Mesto Russia</p>
          </footer>
       </div>
+      <!-- попап редактирования профиля -->
       <section class="popup popup_type_edit-button">
          <div class="popup__content">
             <button type="button" class="popup__close"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
             <form class="popup__form popup__form_type_edit-profile" name="editProfile" novalidate>
-               <input id="username" required minlength="2" maxlength="40" class="popup__input popup__input_type_name" name="nameUser"/>
-               <span class="popup__input-error" id="error-username"></span>
-               <input id="info" required minlength="2" maxlength="200" class="popup__input popup__input_type_info" name="infoUser"/>
-               <span class="popup__input-error" id="error-info"></span>
+               <input id="name" required minlength="2" maxlength="40" class="popup__input popup__input_type_name" name="name"/>
+               <span class="popup__input-error" id="error-name"></span>
+               <input id="about" required minlength="2" maxlength="200" class="popup__input popup__input_type_info" name="about"/>
+               <span class="popup__input-error" id="error-about"></span>
                <button type="submit" class="popup__submit popup__submit_disabled">Сохранить</button>
             </form>
          </div>
       </section>
+      <!--попап изменения аватарки-->
+      <section class="popup popup_type-avatar">
+         <div class="popup__content">
+         <button type="button" class="popup__close"></button>
+         <h2 class="popup__title">
+         Обновить аватар</h3>
+         <form class="popup__form popup__form_type-avatar" name="avatar" novalidate>
+            <input type="url" id="avatar" required class="popup__input popup__input_type_avatar" name="link" placeholder="Ссылка на аватар">
+            <span class="popup__input-error" id="error-avatar"></span>
+            <button class="popup__submit popup__submit_disabled" type="submit">Сохранить</button>
+         </form>
+      </section>
+      <!-- попап добавления карточки -->
       <section class="popup popup_type_add-button">
          <div class="popup__content">
             <button type="button" class="popup__close"></button>
@@ -55,6 +72,7 @@
             </form>
          </div>
       </section>
+      <!-- попап карточки -->
       <div class="popup popup_type_image">
          <figure class="popup__image-content">
             <button type="button" class=" popup__close popup__close-image"></button>
@@ -62,16 +80,30 @@
             <figcaption class="popup__image-subtitle"></figcaption>
          </figure>
       </div>
+      <!-- попап подтверждения удаления карточки -->
+      <section class="popup popup_type-confirm-delete">
+         <div class="popup__content">
+            <button type="button" class="popup__close"></button>
+            <h2 class="popup__title">
+            Вы уверены?</h3>
+            <form class="popup__form" name="cardDelete">
+               <button type="submit" class="popup__submit popup__submit__confirm">Да</button>
+            </form>
+         </div>
+      </section>
+      <!-- темплейт -->
       <template id="elements-template">
          <li class="elements__element">
             <img class="elements__element-photo"/>
             <div class="elements__element-info">
                <h2 class="elements__element-title"></h2>
-               <button class="elements__like elements__like_type_like" type="button"></button>
+               <div class="elements__like_group">
+                  <button class="elements__like elements__like_type_like" type="button"></button>
+                  <div class="elements__like_numbers"></div>
+               </div>
                <button class="elements__delete elements__delete_type_delete" type="button"></button>
             </div>
          </li>
       </template>
-      
    </body>
 </html>

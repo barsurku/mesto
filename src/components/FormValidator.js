@@ -55,7 +55,7 @@ export class FormValidator {
 
     //появление ошибки
     errorElement.textContent = errorMessage;
-  }
+  };
 
   //изменение вида валидности
   #checkInputValidity(input) {
@@ -64,13 +64,13 @@ export class FormValidator {
     } else {
       this.#hideInputError(input);
     }
-  }
+  };
 
   #hasInvalidInput() {
     return this.#inputList.some((input) => {
       return !input.validity.valid;
     });
-  }
+  };
 
   toggleButtonState() {
     if (this.#hasInvalidInput()) {
@@ -80,12 +80,12 @@ export class FormValidator {
       this.#buttonElement.classList.remove(this.#inactiveButtonClass);
       this.#buttonElement.disabled = false;
     }
-  }
+  };
 
   resetValidation() {
     this.toggleButtonState();
     this.#inputList.forEach((input) => {
       this.#hideInputError(input);
     });
-  }
-}
+  };
+};
