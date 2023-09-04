@@ -45,4 +45,4 @@
 @import url(../blocks/popup/__input/_invalid/popup__input_invalid.css);
 @import url(../blocks/popup/__input-error/popup__input-error.css);
 @import url(../blocks/popup/__submit/_disabled/popup__submit_disabled.css);
-@import url(../blocks/popup/__submit/__confirm/popup__submit__confirm.css);
+@import url(../blocks/popup/__submit/popup__submit-confirm.css);
