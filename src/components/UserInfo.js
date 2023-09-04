@@ -18,9 +18,9 @@ export class UserInfo {
     return userInfo;
   };
 
-  setUserInfo(evt) {
-    this.#nameUserSelector.textContent = evt.name;
-    this.#infoUserSelector.textContent = evt.about;
+  setUserInfo(formValue) {
+    this.#nameUserSelector.textContent = formValue.name;
+    this.#infoUserSelector.textContent = formValue.about;
   };
 
   setUserAvatar(data) {

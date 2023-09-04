@@ -15,10 +15,11 @@ const api = new Api(apiConfig);
 let userId;
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
-  .then(([user]) => {
+  .then(([user,items]) => {
     userInfo.setUserInfo(user);
     userInfo.setUserAvatar(user);
     userId = user._id;
+    cardSection.renderItems(items);
   })
   .catch((err) => console.log(err));
 
@@ -56,12 +57,12 @@ const userInfo = new UserInfo({
 //редактирование профиля
 const profilePopup = new PopupWithForm({
   popupSelector: ".popup_type_edit-button",
-  handleFormSubmit: (evt) => {
+  handleFormSubmit: (formValue) => {
     profilePopup.saveLoading(true);
     api
-      .editProfile(evt)
+      .editProfile(formValue)
       .then(() => {
-        userInfo.setUserInfo(evt);
+        userInfo.setUserInfo(formValue);
         profilePopup.close();
       })
       .catch((err) => console.log(err))
@@ -105,10 +106,7 @@ buttonChangeProfileAvatar.addEventListener("click", () => {
 const formAddCard = document.querySelector(".popup__form_type_add-elements");
 const buttonAddCards = document.querySelector(".profile__add-button");
 
-api
-  .getInitialCards()
-  .then((items) => cardSection.renderItems(items))
-  .catch((error) => console.log(error));
+
 
 const addCardsPopup = new PopupWithForm({
   popupSelector: ".popup_type_add-button",
@@ -128,8 +126,12 @@ const addCardsPopup = new PopupWithForm({
   },
 });
 
-//класс section и функция создания карточек
-const cardSection = new Section(createCard, ".elements__cards");
+const cardSection = new Section({
+  renderer: (cardData) => {
+    const cardElement = createCard(cardData);
+    cardSection.append(cardElement);
+  }
+}, ".elements__cards");
 
 function createCard(cardData) {
   const cardElement = new Card(
@@ -141,8 +143,8 @@ function createCard(cardData) {
     handleRemoveLike,
     "#elements-template"
   );
-  const addCardElement = cardElement.createCardElement();
-  cardSection.append(addCardElement);
+  return cardElement.createCardElement();
+
 }
 
 //попап кнопки add
